@@ -1,11 +1,10 @@
 import IconButton from '@/components/buttons/IconButton';
 import IconTextButton from '@/components/buttons/IconTextButton';
+import { ArrowLeftIcon, CrowIcon, HearthIcon, SearchIcon, ShareIcon } from '@/components/Icons';
 import StoreCoupon from '@/components/store/StoreCoupon';
 import StoreDetails from '@/components/store/StoreDetails';
 import StoreMenu from '@/components/store/StoreMenu';
 import SwitchOptions from '@/components/switches/SwitchOptions';
-import { AntDesign, FontAwesome6 } from '@expo/vector-icons';
-import Feather from '@expo/vector-icons/Feather';
 import React from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
@@ -15,14 +14,12 @@ export default function HomeScreen() {
       coupons: [
         {
           title: 'Up to 25% OFF',
-          description:
-            'Enjoy being PRo for this benefit at the top restaurants and stores',
+          description: 'Enjoy being PRo for this benefit at the top restaurants and stores',
           extraInfo: true,
         },
         {
           title: 'Up to 35% OFF',
-          description:
-            'Enjoy being Super PRo for this benefit at the top restaurants and stores',
+          description: 'Enjoy being Super PRo for this benefit at the top restaurants and stores',
           extraInfo: true,
         },
       ],
@@ -77,60 +74,33 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.mainContainer}>
-      <Image
-        source={require('@/assets/images/balance-01.jpg')}
-        style={styles.bannerImage}
-      ></Image>
+      <Image source={require('@/assets/images/balance-01.jpg')} style={styles.bannerImage}></Image>
       <View style={styles.headerButtonsContainer}>
         <View style={styles.topButtonsContainer}>
-          <IconButton
-            icon={<AntDesign name='arrowleft' size={24} color='black' />}
-          />
+          <IconButton icon={<ArrowLeftIcon />} />
           <View style={styles.actionButtonsContainer}>
-            <IconButton
-              icon={<AntDesign name='search1' size={24} color='black' />}
-            />
-            <IconButton
-              icon={<Feather name='share-2' size={24} color='black' />}
-            />
-            <IconButton
-              icon={<AntDesign name='hearto' size={24} color='black' />}
-            />
+            <IconButton icon={<SearchIcon />} />
+            <IconButton icon={<ShareIcon />} />
+            <IconButton icon={<HearthIcon />} />
           </View>
         </View>
         <IconTextButton
-          icon={<AntDesign name='hearto' size={16} color='black' />}
-          text='Create group order'
-          bgColor='white'
+          icon={<HearthIcon size={16} />}
+          text="Create group order"
+          bgColor="white"
           borderWidth={2}
-          borderColor='gray'
+          borderColor="gray"
         />
       </View>
       <View style={styles.storeInfoContainer}>
         <View style={styles.storeTitleContainer}>
-          <Image
-            source={require('@/assets/images/balance-02.jpg')}
-            style={styles.storeImage}
-          />
+          <Image source={require('@/assets/images/balance-02.jpg')} style={styles.storeImage} />
           <Text style={styles.storeTitle}>Title Store</Text>
         </View>
         <View style={styles.storeDetailsContainer}>
-          <StoreDetails
-            title='Delivery'
-            icon={<AntDesign name='search1' size={16} color='black' />}
-            value='42 mins'
-          />
-          <StoreDetails
-            title='Delivery fee'
-            icon={<AntDesign name='search1' size={16} color='black' />}
-            value='42 mins'
-          />
-          <StoreDetails
-            title='Rating'
-            icon={<AntDesign name='search1' size={16} color='black' />}
-            value='4.8'
-            extraValueInfo='(641)'
-          />
+          <StoreDetails title="Delivery" icon={<SearchIcon size={16} />} value="42 mins" />
+          <StoreDetails title="Delivery fee" icon={<SearchIcon size={16} />} value="42 mins" />
+          <StoreDetails title="Rating" icon={<SearchIcon size={16} />} value="4.8" extraValueInfo="(641)" />
         </View>
         <View style={styles.storeSwitchOptions}>
           <SwitchOptions
@@ -140,25 +110,21 @@ export default function HomeScreen() {
             ]}
           />
           <IconTextButton
-            icon={<AntDesign name='search1' size={16} color='#36d686' />}
-            text='See map'
-            borderColor='#dee0df'
+            icon={<SearchIcon size={16} color="#36d686" />}
+            text="See map"
+            borderColor="#dee0df"
             borderWidth={1}
             borderRadius={10}
-            textColor='#36d686'
+            textColor="#36d686"
             textWeight={600}
           />
         </View>
       </View>
-      <ScrollView
-        horizontal={true}
-        style={styles.couponsScroll}
-        showsHorizontalScrollIndicator={false}
-      >
+      <ScrollView horizontal={true} style={styles.couponsScroll} showsHorizontalScrollIndicator={false}>
         <View style={styles.couponsContainer}>
           {mockData[0].coupons.map((item, index) => (
             <StoreCoupon
-              icon={<FontAwesome6 name='crown' size={16} color='#f7c522' />}
+              icon={<CrowIcon size={16} />}
               title={item.title}
               description={item.description}
               extraInfo={item.extraInfo}
