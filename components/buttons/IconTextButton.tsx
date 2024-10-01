@@ -1,3 +1,4 @@
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
@@ -21,9 +22,11 @@ export default function IconTextButton({
   textColor,
   textWeight,
 }: Props) {
+  const colorButton = useThemeColor({}, 'buttonPrimary');
+
   const customStyles = {
     borderWidth: borderWidth || 0,
-    backgroundColor: bgColor || 'white',
+    backgroundColor: bgColor || colorButton,
     borderColor: borderColor || 'black',
     borderRadius: borderRadius || 25,
   };

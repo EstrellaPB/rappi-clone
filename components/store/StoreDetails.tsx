@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { ThemedText } from '../ThemedText';
 
 interface Props {
   title: string;
@@ -11,12 +12,12 @@ export default function StoreDetails({ title, icon, value, extraValueInfo = '' }
   return (
     <View>
       <View style={styles.title}>
-        <Text>{title}</Text>
+        <ThemedText>{title}</ThemedText>
         {icon}
       </View>
       <View style={styles.valueContainer}>
-        <Text style={styles.valueText}>{value}</Text>
-        <Text>{extraValueInfo}</Text>
+        <ThemedText style={styles.valueText}>{value}</ThemedText>
+        <ThemedText>{extraValueInfo}</ThemedText>
       </View>
     </View>
   );
@@ -25,14 +26,16 @@ export default function StoreDetails({ title, icon, value, extraValueInfo = '' }
 const styles = StyleSheet.create({
   title: {
     flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
     gap: 4,
   },
   valueContainer: {
     flexDirection: 'row',
     gap: 4,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   valueText: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
 });

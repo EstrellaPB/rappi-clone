@@ -7,17 +7,9 @@ interface Props {
 export default function StoreMenu({ categories }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<string | number>('1');
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      style={styles.categoriesContainer}
-    >
+    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoriesContainer}>
       {categories.map((category) => (
-        <Pressable
-          key={category.id}
-          onPress={() => setSelectedCategory(category.id)}
-          style={[styles.categoryButton,]}
-        >
+        <Pressable key={category.id} onPress={() => setSelectedCategory(category.id)} style={[styles.categoryButton]}>
           <Text style={styles.categoryTitle}>{category.name}</Text>
         </Pressable>
       ))}
@@ -25,9 +17,7 @@ export default function StoreMenu({ categories }: Props) {
   );
 }
 // !styles for selected category JEJE
-const getSelectedCategoryStyles = () => {
-
-}
+const getSelectedCategoryStyles = () => {};
 const styles = StyleSheet.create({
   categoryButton: {
     padding: 10,
@@ -35,10 +25,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
   },
+  categoryButtonSticky: {
+    position: 'absolute',
+    top: 0,
+  },
   categoriesContainer: {
     maxHeight: 50,
     // paddingVertical: 8,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
   },
 
   categoryTitle: {
@@ -47,6 +41,6 @@ const styles = StyleSheet.create({
   },
 
   selectedCategory: {
-    color: '#36d686'
-  }
+    color: '#36d686',
+  },
 });

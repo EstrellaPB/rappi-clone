@@ -1,14 +1,20 @@
 import IconButton from '@/components/buttons/IconButton';
 import IconTextButton from '@/components/buttons/IconTextButton';
 import { ArrowLeftIcon, CrowIcon, HearthIcon, SearchIcon, ShareIcon } from '@/components/Icons';
+import ParallaxScrollView from '@/components/ParallaxScrollView';
 import StoreCoupon from '@/components/store/StoreCoupon';
 import StoreDetails from '@/components/store/StoreDetails';
 import StoreMenu from '@/components/store/StoreMenu';
 import SwitchOptions from '@/components/switches/SwitchOptions';
+import { ThemedText } from '@/components/ThemedText';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
+  const colorTint = useThemeColor({}, 'tint');
+
   const mockData = [
     {
       coupons: [
@@ -73,72 +79,82 @@ export default function HomeScreen() {
   ];
 
   return (
-    <View style={styles.mainContainer}>
-      <Image source={require('@/assets/images/balance-01.jpg')} style={styles.bannerImage}></Image>
-      <View style={styles.headerButtonsContainer}>
-        <View style={styles.topButtonsContainer}>
-          <IconButton icon={<ArrowLeftIcon />} />
-          <View style={styles.actionButtonsContainer}>
-            <IconButton icon={<SearchIcon />} />
-            <IconButton icon={<ShareIcon />} />
-            <IconButton icon={<HearthIcon />} />
-          </View>
-        </View>
-        <IconTextButton
-          icon={<HearthIcon size={16} />}
-          text="Create group order"
-          bgColor="white"
-          borderWidth={2}
-          borderColor="gray"
-        />
-      </View>
-      <View style={styles.storeInfoContainer}>
-        <View style={styles.storeTitleContainer}>
-          <Image source={require('@/assets/images/balance-02.jpg')} style={styles.storeImage} />
-          <Text style={styles.storeTitle}>Title Store</Text>
-        </View>
-        <View style={styles.storeDetailsContainer}>
-          <StoreDetails title="Delivery" icon={<SearchIcon size={16} />} value="42 mins" />
-          <StoreDetails title="Delivery fee" icon={<SearchIcon size={16} />} value="42 mins" />
-          <StoreDetails title="Rating" icon={<SearchIcon size={16} />} value="4.8" extraValueInfo="(641)" />
-        </View>
-        <View style={styles.storeSwitchOptions}>
-          <SwitchOptions
-            options={[
-              { name: 'Delivery', value: 1 },
-              { name: 'Pickup', value: 2 },
-            ]}
-          />
-          <IconTextButton
-            icon={<SearchIcon size={16} color="#36d686" />}
-            text="See map"
-            borderColor="#dee0df"
-            borderWidth={1}
-            borderRadius={10}
-            textColor="#36d686"
-            textWeight={600}
-          />
-        </View>
-      </View>
-      <ScrollView horizontal={true} style={styles.couponsScroll} showsHorizontalScrollIndicator={false}>
-        <View style={styles.couponsContainer}>
-          {mockData[0].coupons.map((item, index) => (
-            <StoreCoupon
-              icon={<CrowIcon size={16} />}
-              title={item.title}
-              description={item.description}
-              extraInfo={item.extraInfo}
-              key={index}
-            />
-          ))}
-        </View>
-      </ScrollView>
+    <>
+      <StatusBar style="dark" />
+      <View style={styles.mainContainer}>
+        <ParallaxScrollView
+          headerImage={<Image source={require('@/assets/images/balance-01.jpg')} style={styles.bannerImage} />}
+          headerUpfront={
+            <View style={styles.headerButtonsContainer}>
+              <View style={styles.topButtonsContainer}>
+                <IconButton icon={<ArrowLeftIcon color="black" />} />
+                <View style={styles.actionButtonsContainer}>
+                  <IconButton icon={<SearchIcon color="black" />} />
+                  <IconButton icon={<ShareIcon color="black" />} />
+                  <IconButton icon={<HearthIcon color="black" />} />
+                </View>
+              </View>
+              <IconTextButton
+                icon={<HearthIcon size={16} color="black" />}
+                text="Create group order"
+                bgColor="white"
+                borderWidth={2}
+                borderColor="gray"
+              />
+            </View>
+          }
+        >
+          <View>
+            <View style={styles.storeInfoContainer}>
+              <View style={styles.storeTitleContainer}>
+                <Image source={require('@/assets/images/balance-02.jpg')} style={styles.storeImage} />
+                <ThemedText style={styles.storeTitle}>Title Store</ThemedText>
+              </View>
+              <View style={styles.storeDetailsContainer}>
+                <StoreDetails title="Delivery" icon={<SearchIcon size={16} />} value="42 mins" />
+                <StoreDetails title="Delivery fee" icon={<SearchIcon size={16} />} value="42 mins" />
+                <StoreDetails title="Rating" icon={<SearchIcon size={16} />} value="4.8" extraValueInfo="(641)" />
+              </View>
+              <View style={styles.storeSwitchOptions}>
+                <SwitchOptions
+                  options={[
+                    { name: 'Delivery', value: 1 },
+                    { name: 'Pickup', value: 2 },
+                  ]}
+                />
+                <IconTextButton
+                  icon={<SearchIcon size={16} color="#36d686" />}
+                  text="See map"
+                  borderColor="#dee0df"
+                  borderWidth={1}
+                  borderRadius={10}
+                  textColor={colorTint}
+                  textWeight={600}
+                />
+              </View>
+            </View>
+            <ScrollView horizontal={true} style={styles.couponsScroll} showsHorizontalScrollIndicator={false}>
+              <View style={styles.couponsContainer}>
+                {mockData[0].coupons.map((item, index) => (
+                  <StoreCoupon
+                    icon={<CrowIcon size={16} color="#d7d700" />}
+                    title={item.title}
+                    description={item.description}
+                    extraInfo={item.extraInfo}
+                    key={index}
+                  />
+                ))}
+              </View>
+            </ScrollView>
 
-      <View>
-        <Text>Options</Text>
-        <StoreMenu categories={categoriesData} />
+            <View style={{ minHeight: 900 }}>
+              <Text>Options</Text>
+              <StoreMenu categories={categoriesData} />
+            </View>
+          </View>
+        </ParallaxScrollView>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -158,7 +174,8 @@ const styles = StyleSheet.create({
   headerButtonsContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: 300,
+    height: '100%',
+    position: 'absolute',
     padding: 10,
   },
   actionButtonsContainer: {

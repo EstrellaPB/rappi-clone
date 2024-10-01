@@ -1,6 +1,7 @@
-import { Entypo } from '@expo/vector-icons';
 import { ReactNode } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { ThemedText } from '../ThemedText';
+import { ChevronRight } from '../Icons';
 
 interface Props {
   icon: ReactNode;
@@ -8,23 +9,18 @@ interface Props {
   description: string | ReactNode;
   extraInfo?: boolean;
 }
-export default function StoreCoupon({
-  icon,
-  title,
-  description,
-  extraInfo = false,
-}: Props) {
+export default function StoreCoupon({ icon, title, description, extraInfo = false }: Props) {
   return (
     <Pressable onPress={() => console.log('coupon selected')}>
       <View style={styles.container}>
         <View style={styles.body}>
           {icon}
           <View style={styles.info}>
-            <Text style={styles.titleText}>{title}</Text>
-            <Text style={styles.descriptionText}>{description}</Text>
+            <ThemedText style={styles.titleText}>{title}</ThemedText>
+            <ThemedText style={styles.descriptionText}>{description}</ThemedText>
           </View>
         </View>
-        {extraInfo && <Entypo name='chevron-right' size={24} color='black' />}
+        {extraInfo && <ChevronRight />}
       </View>
     </Pressable>
   );
